@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+{% from "_formhelpersfullwidth.html" import render_field %}  
+
+<form method="post" action="/index.html">
+  <div class="row">
+    <h2>Enter a zip code</h2>    
+    <!-- <label for="exampleMessage">Enter a zip code</label> -->
+    {{ render_field(form.zip, class="u-full-width", placeholder="try 10016") }}  </div>
+    <input class="button-primary" type="submit" value="Submit">
+  </div>
+</form>
+
+
+      
+  
+{% endblock %}

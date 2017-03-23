@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="A tool for discovering NEH-funded projects at local institutions.">
+    {% if title %}
+    <title> {{ title }} - </title>
+
+    {% else %}
+    <title>NEH Impact Index</title>
+    {% endif %}
+    {% include 'resources.html' %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="indent">    
+      <!-- <a href="/index.html"><img src="{{ url_for('static', filename="heading.png") }}"></a> -->
+    {% include 'navbar.html' %}
+    <div class="container">    
+    {% block content %}{% endblock %}
+    </div>
+
+    
+</body>
+</html>
+

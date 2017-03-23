@@ -1,0 +1,81 @@
+import sqlite3
+from app import app
+# from flask import flash, redirect, render_template
+# from flask import request, session, url_for, jsonify
+
+
+# This lets us import dictionaries from the database instead of tuples
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
+def db_connect(db_name):
+    """Connect to named database and returns cursor object."""
+    conn = sqlite3.connect(db_name)
+    conn.row_factory = dict_factory
+    return conn.cursor()
+
+
+
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+@app.route('/index.html', methods=['GET', 'POST'])
+def index():
+
+    # conn = sqlite3.connect('test.db')
+    # conn.row_factory = dict_factory
+
+    # cur = conn.cursor()
+
+    # get last nine items from db    
+    # query = cur.execute('SELECT * FROM databases;')
+    # databases = query.fetchall()
+    # databases = databases[-9:]
+    # databases.reverse()
+    
+    return render_template('index.html')
+
+
+# @app.route('/about.html', methods=['GET'])
+# def about():
+#     return render_template('about.html')
+
+
+# @app.route('/api', methods=['GET'])
+# def api_root():
+#     if 'id' in request.args:
+#         cur = db_connect('test.db')
+        
+#         query = cur.execute(
+#             'SELECT * FROM databases WHERE id=?;',
+#                             (request.args['id'],))
+#         return jsonify(query.fetchone())
+#     else:
+#         return "Malformed request. Please try again."
+
+    
+# @app.route('/api/id/<id>', methods=['GET'])
+# def api_id(id):
+#     cur = db_connect('test.db')
+#     print(request.args)
+
+#     if id:
+#         query = cur.execute(
+#             'SELECT * FROM databases WHERE id=?;',
+#             (id))
+#         return jsonify(query.fetchone())
+
+
+# @app.errorhandler(404)
+# def page_not_found(e):
+#     return render_template('404.html'), 404
+
+
+# @app.errorhandler(500)
+# def internal_server_error(e):
+#     return render_template('500.html'), 500
+    

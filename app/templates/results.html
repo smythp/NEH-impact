@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Results</h2>
+
+    {% for grant in grants %}
+    {% if loop.index in [1,4,7] %}
+    <div class="row">
+      {% endif %}
+      <div class="col-md-3">
+	<h2>{{ grant }}</h2>
+      </div>
+      {% if loop.index in [3,6,9] %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+{% endblock %}
