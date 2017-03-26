@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
+<style>
+  h6, p {
+    text-align: left;
+
+  }
+ .six.columns.card h6  {
+   text-align: left;
+   }
+</style>
+
+
 <h2>Results</h2>
 
 
 {% if grants %}
 {% else %}
-<p style="text-align: left">No results found for that zip code.</p>
+<p class="left-align">No results found for that zip code.</p>
 {% endif %}
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <h6{{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6>
+    <h6 {{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6>
 
-    <p>{{ grant.YearAwarded }}</p>
+    <p>Year: {{ grant.YearAwarded }}</p>
     
     {% if grant.ProjectDesc %}
-    <p>{{ grant.ProjectDesc | truncate(600) }}</p>
+    <p class="left-align">{{ grant.ProjectDesc | truncate(600) }}</p>
     {% else %}
     <p>{{ grant.ToSupport | truncate(600) }}</p>
     {% endif %}

@@ -19,6 +19,14 @@ def db_connect(db_name):
     return conn
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('404.html'), 500
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -44,14 +52,15 @@ ToSupport, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal=? \
 AND (ProjectDesc is not null OR ToSupport is not null);'
-        grants = cur.execute(query, (zip_input,))
-        
+        grants = cur.execute(query, (zip_input,)).fetchall()
+
         return render_template('results.html', grants=grants, form=form)
         
     else:
         return render_template('index.html', form=form)
-        
 
-
+    
     form = ZipForm(request.form)
     return render_template('index.html', form=form)
+
+
