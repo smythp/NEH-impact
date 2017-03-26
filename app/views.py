@@ -28,7 +28,6 @@ def index():
     form = ZipForm(request.form)
     if request.method == 'POST' and form.validate():
         zip_input = request.form['zip']
-        grants = []
 
         conn = db_connect('grants.db')
         cur = conn.cursor()
@@ -43,10 +42,10 @@ Program, \
 ProjectDesc, \
 ToSupport, \
 PrimaryDiscipline \
-FROM grants WHERE ShortPostal=?'
-        
+FROM grants WHERE ShortPostal=? \
+AND (ProjectDesc is not null OR ToSupport is not null);'
         grants = cur.execute(query, (zip_input,))
-
+        
         return render_template('results.html', grants=grants, form=form)
         
     else:
