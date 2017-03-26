@@ -13,8 +13,8 @@
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <h6{{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant | truncate(32) }}</h6>
-    <p>Pudding candy gingerbread caramels. Chocolate bar wafer chupa chups. Jelly muffin cake candy. Cupcake carrot cake powder. Carrot cake bear claw pie cake fruitcake.</p>
+    <h6{{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6>
+    <p>{{ grant.ToSupport }}</p>
   </div>
   {{ loop.cycle('', '</div>') | safe }}
   {% endfor %}
