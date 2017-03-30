@@ -59,13 +59,13 @@ FROM grants WHERE ShortPostal=? \
 AND (ProjectDesc is not null OR ToSupport is not null);'
         grants = cur.execute(query, (zip_input,)).fetchall()
 
-        return render_template('results.html', grants=grants, form=form)
+        return render_template('results.html', grants=grants, form=form, jquery=True)
         
     else:
-        return render_template('index.html', form=form)
+        return render_template('index.html', form=form, jquery=True)
 
     
     form = ZipForm(request.form)
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, jquery=True)
 
 
