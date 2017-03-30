@@ -40,12 +40,20 @@ def internal_server_error(e):
 def index():
     form = ZipForm(request.form)
     if request.method == 'POST' and form.validate():
-        print(request.form)
+
         zip_input = request.form['zip']
 
-        conn = db_connect('grants.db')
-        cur = conn.cursor()
+        if 'distance' in request.form:
+            distance = request.form['distance']
+        else:
+            distance = 2.0
 
+        conn = sqlite3.connect('grants.db')
+        cur = conn.cursor()
+        distance_query = 'SELECT end_zip from distances WHERE start_zip=? AND distance<?;'
+
+        zips_to_return = [zipcode[0] for zipcode in cur.execute(distance_query, (zip_input, distance,)).fetchall()]
+        
         query = 'SELECT Institution, \
 InstCity, \
 InstState, \
@@ -58,6 +66,8 @@ ToSupport, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal=? \
 AND (ProjectDesc is not null OR ToSupport is not null);'
+        conn2 = db_connect('grants.db')
+        cur = conn2.cursor()
         grants = cur.execute(query, (zip_input,)).fetchall()
 
         return render_template('results.html', grants=grants, form=form, jquery=True)
