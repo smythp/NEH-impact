@@ -2,13 +2,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-<style> 
-#panel {
-  display: none;
-}
-</style>
-
 {% from "_formhelpersfullwidth.html" import render_field %}  
 
 <form method="post" action="/index.html">
@@ -21,27 +14,25 @@
   <div class="button" id="flip">Distance</div>
   </span>
   <span id="panel">
-    <button type="button" name="distance" value="2">2</button>
-    <button type="button" name="distance" value="5">5</button>
-    <button type="button" name="distance" value="10">10</button>    
-    <button type="button" name="distance" value="20">20</button>
-    <button type="button" name="distance" value="50">50</button>
+    <label class="button"><input type="radio" name="distance" value="2">2</label>
+    <label class="button"><input type="radio" name="distance" value="5">5</label>
+    <label class="button"><input type="radio" name="distance" value="10">10</label>
+    <label class="button"><input type="radio" name="distance" value="20">20</label>
+    <label class="button"><input type="radio" name="distance" value="50">50</label>
   </span>
   </div>
 </form>
 
-
-      
 <script>
  $("#flip").click(function(){
 
      $("#hide-buttons").hide("fast");
      $("#panel").show("slow");
  });
-  $("#panel").click(function(){
-      $("#panel").hide("fast");
-      $("#hide-buttons").show("slow");
-});     
+ $("#panel").click(function(){
+     $("#panel").hide("fast");
+     $("#hide-buttons").show("slow");
+ });     
 </script>
   
 {% endblock %}
