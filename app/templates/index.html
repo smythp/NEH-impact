@@ -14,19 +14,18 @@
 <form method="post" action="/index.html">
   <div class="row">
     <h2>Enter a zip code</h2>    
-    <!-- <label for="exampleMessage">Enter a zip code</label> -->
     {{ render_field(form.zip, class="u-full-width", placeholder="try 10016") }}  </div>
   <span id="hide-buttons">
     <input id="submit-button" class="button-primary" type="submit" value="Submit">
 
   <div class="button" id="flip">Distance</div>
   </span>
-  <span id="panel">  
-    <button>2</button>    
-    <button>5</button>
-    <button>10</button>    
-    <button>20</button>
-    <button>50</button>
+  <span id="panel">
+    <button type="button" name="distance" value="2">2</button>
+    <button type="button" name="distance" value="5">5</button>
+    <button type="button" name="distance" value="10">10</button>    
+    <button type="button" name="distance" value="20">20</button>
+    <button type="button" name="distance" value="50">50</button>
   </span>
   </div>
 </form>
@@ -38,6 +37,10 @@
 
      $("#hide-buttons").hide("fast");
      $("#panel").show("slow");
+ });
+  $("#panel").click(function(){
+      $("#panel").hide("fast");
+      $("#hide-buttons").show("slow");
 });     
 </script>
   

@@ -40,6 +40,7 @@ def internal_server_error(e):
 def index():
     form = ZipForm(request.form)
     if request.method == 'POST' and form.validate():
+        print(request.form)
         zip_input = request.form['zip']
 
         conn = db_connect('grants.db')
