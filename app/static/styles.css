@@ -115,3 +115,7 @@ input[type="checkbox"], input[type="radio"] {
 p {
     text-align: left;
 }
+
+string {
+    font-weight: bold;
+}

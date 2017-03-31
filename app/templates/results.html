@@ -4,9 +4,11 @@
 <style>
   h6, p {
     text-align: left;
+    padding: 0 15px;
 
   }
  .six.columns.card h6  {
+   padding: 0 15px;
    text-align: left;
    }
 </style>
@@ -26,8 +28,8 @@
   <div class="six columns card">
     <a href="grant/{{ grant.id }}"><h6 {{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
 
-    <p>Year: {{ grant.YearAwarded }}<br>
-    Institution: {{ grant.Institution }}</p>
+    <string><p>{{ grant.Institution }}<br>
+      {{ grant.InstCity }}, {{grant.InstState }}&nbsp; &nbsp;|&nbsp;&nbsp; {{ grant.YearAwarded }}</p></string>
     
     {% if grant.ProjectDesc %}
     <p class="left-align">{{ grant.ProjectDesc | truncate(600) }}</p>
