@@ -19,6 +19,12 @@ def db_connect(db_name):
     return conn
 
 
+def question_mark_sequence(num):
+    "Makes sequence of question marks that is NUM long for use in building SQL statements."
+    x = '?, ' * num
+    return x[:-2]
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -40,10 +46,19 @@ def internal_server_error(e):
 def index():
     form = ZipForm(request.form)
     if request.method == 'POST' and form.validate():
+
         zip_input = request.form['zip']
 
-        conn = db_connect('grants.db')
+        if 'distance' in request.form:
+            distance = request.form['distance']
+        else:
+            distance = 2.0
+
+        conn = sqlite3.connect('grants.db')
         cur = conn.cursor()
+        distance_query = 'SELECT end_zip from distances WHERE start_zip=? AND distance<?;'
+
+        zips_to_return = [zipcode[0] for zipcode in cur.execute(distance_query, (zip_input, distance,)).fetchall()]
 
         query = 'SELECT Institution, \
 InstCity, \
@@ -55,17 +70,22 @@ Program, \
 ProjectDesc, \
 ToSupport, \
 PrimaryDiscipline \
-FROM grants WHERE ShortPostal=? \
-AND (ProjectDesc is not null OR ToSupport is not null);'
-        grants = cur.execute(query, (zip_input,)).fetchall()
+FROM grants WHERE ShortPostal in (%s) \
+AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
+        print(tuple(zips_to_return))
+        print(query)
 
-        return render_template('results.html', grants=grants, form=form)
+        conn2 = db_connect('grants.db')
+        cur = conn2.cursor()
+        grants = cur.execute(query, tuple(zips_to_return)).fetchall()
+
+        return render_template('results.html', grants=grants, form=form, jquery=True)
         
     else:
-        return render_template('index.html', form=form)
+        return render_template('index.html', form=form, jquery=True)
 
     
     form = ZipForm(request.form)
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, jquery=True)
 
 

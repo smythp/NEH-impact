@@ -102,4 +102,13 @@ ul {
 .left-align {
     text-align: left;
 }
-		    
+
+input[type="checkbox"], input[type="radio"] {
+    display: none;
+}
+
+
+#panel {
+  display: none;
+}
+

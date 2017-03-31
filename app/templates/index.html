@@ -7,13 +7,32 @@
 <form method="post" action="/index.html">
   <div class="row">
     <h2>Enter a zip code</h2>    
-    <!-- <label for="exampleMessage">Enter a zip code</label> -->
     {{ render_field(form.zip, class="u-full-width", placeholder="try 10016") }}  </div>
-    <input class="button-primary" type="submit" value="Submit">
+  <span id="hide-buttons">
+    <input id="submit-button" class="button-primary" type="submit" value="Submit">
+
+  <div class="button" id="flip">Distance</div>
+  </span>
+  <span id="panel">
+    <label class="button"><input type="radio" name="distance" value="2">2</label>
+    <label class="button"><input type="radio" name="distance" value="5">5</label>
+    <label class="button"><input type="radio" name="distance" value="10">10</label>
+    <label class="button"><input type="radio" name="distance" value="20">20</label>
+    <label class="button"><input type="radio" name="distance" value="50">50</label>
+  </span>
   </div>
 </form>
 
+<script>
+ $("#flip").click(function(){
 
-      
+     $("#hide-buttons").hide("fast");
+     $("#panel").show("slow");
+ });
+ $("#panel").click(function(){
+     $("#panel").hide("fast");
+     $("#hide-buttons").show("slow");
+ });     
+</script>
   
 {% endblock %}

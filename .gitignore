@@ -6,4 +6,6 @@ __pycache__/
 .python-version
 *.xml
 grants.db
+distances.db
 neh-env/
+myprojectenv/
