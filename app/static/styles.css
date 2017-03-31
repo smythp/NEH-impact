@@ -112,3 +112,10 @@ input[type="checkbox"], input[type="radio"] {
   display: none;
 }
 
+p {
+    text-align: left;
+}
+
+string {
+    font-weight: bold;
+}
