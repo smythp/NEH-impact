@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+  <div class="four columns">
+
+    <h4>{{ grant.ProjectTitle }}</h4>
+    <h6>{{ grant.Institution }}<br>
+      {{ grant.InstCity }}, {{ grant.InstState }}</h6>    
+    <h6>{{ grant.PrimaryDiscipline }}</h6>
+    <h6>{{ grant.YearAwarded }}</h6>
+
+    
+
+  </div>
+  <div class="eight columns">
+    {% if grant.ProjectDesc %}
+    <h4>Description</h4>    
+    <p>{{ grant.ProjectDesc }}</p>
+    {% elif grant.ToSupport %}
+    <h4>Description</h4>
+    <p>{{ grant.ToSupport }}</p>
+    {% else %}
+    <h4>Description</h4>        
+    <p>No description for this grant.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

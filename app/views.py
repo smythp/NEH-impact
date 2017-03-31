@@ -62,6 +62,7 @@ def index():
 
         query = 'SELECT Institution, \
 InstCity, \
+id, \
 InstState, \
 InstCountry, \
 YearAwarded, \
@@ -88,4 +89,10 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
     form = ZipForm(request.form)
     return render_template('index.html', form=form, jquery=True)
 
+@app.route('/grant/<grant_id>', methods=['GET'])
+def project_entry(grant_id):
+    conn = db_connect('grants.db')
+    cur = conn.cursor()
+    grant = cur.execute('SELECT * FROM grants WHERE id=?;', (grant_id,)).fetchone()
 
+    return render_template('project_entry.html', grant=grant)

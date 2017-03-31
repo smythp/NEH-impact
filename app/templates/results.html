@@ -24,7 +24,7 @@
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <h6 {{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6>
+    <a href="grant/{{ grant.id }}"><h6 {{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
 
     <p>Year: {{ grant.YearAwarded }}<br>
     Institution: {{ grant.Institution }}</p>
