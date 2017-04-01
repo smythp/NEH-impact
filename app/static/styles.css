@@ -88,14 +88,13 @@ ul {
 .six.columns.card h6 {
     border: none;
     outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: #fff;
-    background-color: #1EAEDB;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
     font-size: 18px;
+    padding: 100px;
+    color: #fff;
+    cursor: pointer;
+    /* background-color: #1EAEDB; */    
+    /* width: 100%; */
+    /* display: inline-block; */    
 }
 
 
@@ -116,6 +115,38 @@ p {
     text-align: left;
 }
 
-string {
+strong {
     font-weight: bold;
+}
+
+/* Division color labeling */
+.division.research_education {
+    background-color: #3723bc;
+}
+.division.other_humanities {
+    background-color: #D32A31;
+}
+.division.education {
+    background-color: #00ABED;
+}
+.division.research {
+    background-color: #23BC4A;
+}
+.division.public_programs {
+    background-color: #F20591;
+}
+.division.federal_state {
+    background-color: #F7BE29;
+}
+.division.challenge_grants {
+    background-color: #DB5A1E;
+}
+.division.preservation_access {
+    background-color: #2B52BC;
+}
+.division.research_education {
+
+}
+.division.digital_humanities {
+
 }

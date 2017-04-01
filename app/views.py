@@ -70,6 +70,7 @@ ProjectTitle, \
 Program, \
 ProjectDesc, \
 ToSupport, \
+division_reclassification, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))

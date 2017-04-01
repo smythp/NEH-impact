@@ -24,12 +24,24 @@
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}
 
+
+<!-- <div class="row">
+     <div style="border:solid" class="six columns card">
+     <h4 style="background-color:green">The title of the card</h6>
+     <p>Some stuff</p>
+     </div>
+     <div class="six columns card">
+     <h6>The title of the card</h6>
+     <p>Some stuff</p>    
+     </div>
+     </div> -->
+
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <a href="grant/{{ grant.id }}"><h6 {{ loop.cycle('', '', ' style="background-color:#dbaa1e;"', ' style="background-color:#dbaa1e;"') | safe }}>{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
+    <a href="grant/{{ grant.id }}"><h6 class="division {{ grant.division_reclassification }}">{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
 
-    <string><p>{{ grant.Institution }}<br>
-      {{ grant.InstCity }}, {{grant.InstState }}&nbsp; &nbsp;|&nbsp;&nbsp; {{ grant.YearAwarded }}</p></string>
+    <strong><p>{{ grant.Institution }}<br>
+      {{ grant.InstCity }}, {{grant.InstState }}&nbsp; &nbsp;|&nbsp;&nbsp; {{ grant.YearAwarded }}</p></strong>
     
     {% if grant.ProjectDesc %}
     <p class="left-align">{{ grant.ProjectDesc | truncate(600) }}</p>
