@@ -16,6 +16,15 @@
 
 <h2>Results</h2>
 
+<div style="width: 120px">
+
+  <p>
+    <div class="legend headline">Legend</div>
+    {% for division in divisions %}
+    <div class="legend {{ division.class }}">{{ division.name }}</div>
+    {% endfor %}
+  </p>
+</div>
 
 {% if grants %}
 {% else %}
@@ -24,17 +33,6 @@
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}
 
-
-<!-- <div class="row">
-     <div style="border:solid" class="six columns card">
-     <h4 style="background-color:green">The title of the card</h6>
-     <p>Some stuff</p>
-     </div>
-     <div class="six columns card">
-     <h6>The title of the card</h6>
-     <p>Some stuff</p>    
-     </div>
-     </div> -->
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">

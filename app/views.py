@@ -74,14 +74,36 @@ division_reclassification, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
-        print(tuple(zips_to_return))
-        print(query)
 
         conn2 = db_connect('grants.db')
         cur = conn2.cursor()
         grants = cur.execute(query, tuple(zips_to_return)).fetchall()
 
-        return render_template('results.html', grants=grants, form=form, jquery=True)
+        display_names = {
+            "research_education": "Research and Education",
+            "other_humanities": "Other Humanities Projects",
+            "education": "Education",
+            "research": "Research",
+            "public_programs": "Public Programs",
+            "federal_state": "Federal or State Collaborations",
+            "challenge_grants": "Challenge Grants",
+            "preservation_access": "Preservation and Access",
+            "digital_humanities": "Digital Humanities",
+            }
+
+        
+        distinct_divisions = set([grant['division_reclassification'] for grant in grants])
+
+        divisions = []
+        for classification in distinct_divisions:
+            divisions.append({
+                "class" : classification,
+                "name" : display_names[classification],
+                })
+
+        print(divisions)
+
+        return render_template('results.html', grants=grants, form=form, divisions=divisions, jquery=True)
         
     else:
         return render_template('index.html', form=form, jquery=True)
