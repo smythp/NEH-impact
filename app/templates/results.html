@@ -16,13 +16,21 @@
 
 <h2>Results</h2>
 
-<p><button id="view_overview" style="margin-right:10px">View Overview</button> {{ results_count }} results returned. </p>
-<div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
 
+<p>
+  <button id="view_overview" style="margin-right:10px">View Overview</button>
+
+  <!-- Put the results on the next line and indent if the screen is small -->
+  <br class="none_on_desktop"><span class="none_on_desktop">&nbsp;&nbsp;&nbsp;</span>
+  {{ results_count }} results returned.
+</p>
+
+
+    <div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
   <p>
     <!-- <div class="legend headline">Legend</div> -->
     {% for division in divisions %}
-    <div class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} results</div>
+    <div class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
     {% endfor %}
   </p>
 </div>
