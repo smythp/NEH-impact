@@ -16,12 +16,13 @@
 
 <h2>Results</h2>
 
-<div style="width: 120px">
+<p><button id="view_overview" style="margin-right:10px">View Overview</button> {{ results_count }} results returned. </p>
+<div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
 
   <p>
-    <div class="legend headline">Legend</div>
+    <!-- <div class="legend headline">Legend</div> -->
     {% for division in divisions %}
-    <div class="legend {{ division.class }}">{{ division.name }}</div>
+    <div class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} results</div>
     {% endfor %}
   </p>
 </div>
@@ -50,5 +51,12 @@
   {{ loop.cycle('', '</div>') | safe }}
   {% endfor %}
 
+<script>
+ $("#view_overview").click(function(){
+     $("#overview_panel").toggle("slow");
+ });
 
+</script>
+
+  
 {% endblock %}

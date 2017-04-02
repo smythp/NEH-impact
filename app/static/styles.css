@@ -145,7 +145,10 @@ strong {
     background-color: #2B52BC;
 }
 .digital_humanities {
-
+    background-color: #ff3030;
+}
+.research_education {
+    background-color: #228b22;
 }
 
 .legend {
@@ -161,3 +164,4 @@ strong {
     color: #000000;
     padding-left: 0;
 }
+
