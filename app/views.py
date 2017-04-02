@@ -3,6 +3,7 @@ from app import app
 from flask import flash, redirect, render_template
 from flask import request, session, url_for, jsonify
 from app.forms import ZipForm
+from collections import Counter
 
 # This lets us import dictionaries from the database instead of tuples
 def dict_factory(cursor, row):
@@ -70,25 +71,50 @@ ProjectTitle, \
 Program, \
 ProjectDesc, \
 ToSupport, \
+division_reclassification, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
-        print(tuple(zips_to_return))
-        print(query)
 
         conn2 = db_connect('grants.db')
         cur = conn2.cursor()
         grants = cur.execute(query, tuple(zips_to_return)).fetchall()
 
-        return render_template('results.html', grants=grants, form=form, jquery=True)
+        results_count = len(grants)
+
+        display_names = {
+            "research_education": "Research and Education",
+            "other_humanities": "Other Humanities",
+            "education": "Education",
+            "research": "Research",
+            "public_programs": "Public Programs",
+            "federal_state": "Federal or State Collaborations",
+            "challenge_grants": "Challenge Grants",
+            "preservation_access": "Preservation and Access",
+            "digital_humanities": "Digital Humanities",
+            }
+
+        all_divisions = [grant['division_reclassification'] for grant in grants]
+
+        division_count = Counter(all_divisions)
+        distinct_divisions = set(all_divisions)
+
+        divisions = []
+        for classification in distinct_divisions:
+            divisions.append({
+                "class" : classification,
+                "name" : display_names[classification],
+                "count" : division_count[classification]
+                })
+
+        return render_template('results.html', grants=grants,
+                               form=form, divisions=divisions,
+                               results_count=results_count,
+                               jquery=True)
         
     else:
         return render_template('index.html', form=form, jquery=True)
-
     
-    form = ZipForm(request.form)
-    return render_template('index.html', form=form, jquery=True)
-
 @app.route('/grant/<grant_id>', methods=['GET'])
 def project_entry(grant_id):
     conn = db_connect('grants.db')
