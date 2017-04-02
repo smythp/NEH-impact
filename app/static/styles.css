@@ -165,3 +165,9 @@ strong {
     padding-left: 0;
 }
 
+@media (min-width: 600px) {
+    .none_on_desktop {
+    display:none;
+    }
+}
+
