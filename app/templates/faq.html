@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>FAQ</h1>
+
+<div class="nice-links">
+
+  <p>
+  <h5 class="faq q">What does this thing do?</h5>
+  <p class="faq a">You enter a zip code and optionally choose a radius by clicking the "distance" button. You'll be presented with a list of projects within that area that were funded by the NEH. The <strong>View Overview</strong> button gives a breakdown of the projects by category and tells you what the colors mean.
+  </p>
+</p>
+  
+<p>
+  <h5 class="faq q">Who are you?</h5>
+  <p class="faq a">I'm Patrick Smyth, a graduate student in English and a Digital Fellow at the Graduate Center. I made this site as part of a larger effort by Matt Gold, Lisa Rhody, and the Digital Fellows to show why the NEH is a critical institution and should continue to be funded.</p>
+</p> 
+
+<p>
+  <h5 class="faq q">Why do you care so much about the NEH?</h5>
+  <p class="faq a">I work on a project funded by the NEH called <a href="http://dhbox.org/">DH Box</a>, which is one reason defunding the NEH hits close to home for me. What bothers me most, though, is thinking of all the critical projects and programs that will never be possible if the NEH is defunded. Archives will go unexplored, history will go unpreserved, and students will go untaught. If the United States cares about its culture, and it should, we should all care about the NEH.</p>
+</p>
+
+<p>
+  <h5 class="faq q">How did you make this site?</h5>
+  <p class="faq a">The site is written in Python using a minimalist web framework named <a href="http://flask.pocoo.org/">Flask</a>. The design is mostly hand-coded in CSS with <a href="http://getskeleton.com/">Skeleton responsive boilerplate</a> used as a basis. The animations are standard JQuery. You can <a href="https://github.com/smythp/NEH-impact">read the code on GitHub</a>.
+  </p>
+</p>
+
+<p>
+  <h5 class="faq q">Where did the data come from?</h5>
+  <p class="faq a">Data on grant-funded projects was provided by the NEH. Information on the relative distances between zip codes was adapted from data from the <a href="http://www.nber.org/data/zip-code-distance-database.html">National Bureau of Economic Research</a>. Data was converted from text-based formats to a sqlite database for use with the web app.</p>
+</p>
+
+<p>
+  <h5 class="faq q">Can you make the site do X? Also I found bugs. So many bugs.</em></h5>
+  <p class="faq a"><a href="https://github.com/smythp/NEH-impact/issues">Open an issue on GitHub</a></p>
+</p>
+
+
+<!-- FAQ Template -->
+
+<!-- <p>
+     <h5 class="faq q"></h5>
+     <p class="faq a"></p>
+     </p> -->
+
+
+{% endblock %}

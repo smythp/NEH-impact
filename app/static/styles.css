@@ -171,3 +171,28 @@ strong {
     }
 }
 
+.nice-lins {
+
+    a:link {
+	color: #D32A31;
+	text-decoration: none;    
+    }    
+
+
+    p a:visited {
+	text-decoration: none;    
+	color: #2CD5CE;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.faq.q {
+    margin-bottom: 10px;
+}
+
+.faq.a {
+    margin-left:20px;
+}
