@@ -36,6 +36,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/faq', methods=['GET'])
+def faq():
+    return render_template('faq.html')
+
+
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('404.html'), 500
