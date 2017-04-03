@@ -196,3 +196,31 @@ a {
 .faq.a {
     margin-left:20px;
 }
+
+.box-shadow-menu {
+  position: relative;
+  padding-left: 1.25em;
+}
+.box-shadow-menu:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 2em;
+  border:solid;
+  height: .2em;
+  background: black;
+  box-shadow: 
+    0 .6em 0 0 black,
+    0 1.2em 0 0 black;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}

@@ -9,8 +9,15 @@
   @media (max-width: 600px) {   
     .desktop-only {
       display: none;
-   }
+    }
+  }
 
+  @media (min-width: 600px) {   
+    .desktop-only {
+      display: inline !important;
+    }
+  } 
+    
  .vertical-display li {
    display: block;
    padding-top:10px;
@@ -35,8 +42,8 @@
     <li><a href="https://digitalfellows.commons.gc.cuny.edu/">Fellows</a></li>
     <li><a href="https://www.neh.gov/">NEH</a></li>
   </ul>
+  <img style="position:absolute;top:13px;right:13px" id="hamburger" src="{{ url_for('static', filename="img/hamburger.svg") }}" rel="stylesheet">  
 
-  <button style="position:absolute;top:10px;right:10px" id="hamburger" href="">Navigate</button>
 
 <script>
  $("#hamburger").click(function(){
@@ -47,7 +54,3 @@
 
 </script>
 </nav>
-
-
-  
-
