@@ -8,7 +8,7 @@
   <div class="row">
     <h2>NEH Impact Index</h2>
     <span style="color:gray">Enter a zip code</span>
-    {{ render_field(form.zip, class="u-full-width", type="number", placeholder="try 10016", autofocus=True) }}  </div>
+    {{ render_field(form.zip, class="u-full-width", type="number",  pattern="\d*", placeholder="try 10016", autofocus=True) }}  </div>
   
 
   <span id="hide-buttons">
