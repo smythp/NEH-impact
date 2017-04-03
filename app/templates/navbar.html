@@ -13,6 +13,12 @@
   }
 
   @media (min-width: 600px) {   
+    .display-again {
+      display: none !important;
+    }
+  }
+ 
+  @media (min-width: 600px) {   
     .desktop-only {
       display: inline !important;
     }
@@ -24,12 +30,11 @@
    position: relative;
    width: 100%;
    font-size:20px;
-   }
- .desktop-only {
-   left: 20%;
-   position: relative;
+   left: 75%;
 }
-}
+
+
+
 </style>
 
 <nav class="navigation">
@@ -47,9 +52,8 @@
 
 <script>
  $("#hamburger").click(function(){
+     $(".desktop-only").toggleClass("vertical-display").toggleClass("display-again");
      $("ul.desktop-only").toggle("fast");
-     $(".desktop-only").toggleClass("vertical-display");
-
  });
 
 </script>
