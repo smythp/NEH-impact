@@ -1,16 +1,37 @@
+<style>
+ @media (min-width: 600px) {
+   .hamburger {
+     display: none;
+     float:right;
+     margin-left:400px;
+
+   }
+ }
+  @media (max-width: 600px) {   
+   .desktop-only {
+     display: none;
+   }
+ }
+
+ 
+</style>
+
 <nav class="navigation">
-  <a href="#" class="menu-icon">
-  <a href="#" class="menu-icon">
-  </a>
-  <a href="/index.html"><img class="vertical-center" src="{{ url_for('static', filename="img/gcdi_logo_21px.jpg")}}" alt="site hoe"></a>
-  <ul>
+
+
+    <a href="/index.html"><img class="desktop-only vertical-center" src="{{ url_for('static', filename="img/gcdi_logo_21px.jpg")}}" alt="site hoe"></a>
+  <ul class="desktop-only">
     <li><a href="/about">About</a></li>
     <li><a href="/faq">FAQ</a></li>    
     <li><a href="https://digitalfellows.commons.gc.cuny.edu/">Fellows</a></li>
     <li><a href="https://www.neh.gov/">NEH</a></li>
-
-
-
-
   </ul>
+
+  <button style="position:absolute;top:10px;right:10px" class="hamburger" href="">Navigate</button>
+
+
 </nav>
+
+
+  
+
