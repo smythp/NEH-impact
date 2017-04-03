@@ -52,9 +52,13 @@
 
 <script>
  $("#hamburger").click(function(){
-     $(".desktop-only").toggleClass("vertical-display").toggleClass("display-again");
-     $("ul.desktop-only").toggle("fast");
- });
+     
+     $("ul.desktop-only").toggle("fast", complete=function(){
+	 $(".desktop-only").toggleClass("vertical-display").toggleClass("display-again");
+     })
+     });
+	 
+ 
 
 </script>
 </nav>
