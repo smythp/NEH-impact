@@ -1,19 +1,28 @@
 <style>
  @media (min-width: 600px) {
-   .hamburger {
+   #hamburger {
      display: none;
      float:right;
      margin-left:400px;
-
    }
  }
   @media (max-width: 600px) {   
-   .desktop-only {
-     display: none;
+    .desktop-only {
+      display: none;
    }
- }
 
- 
+ .vertical-display li {
+   display: block;
+   padding-top:10px;
+   position: relative;
+   width: 100%;
+   font-size:20px;
+   }
+ .desktop-only {
+   left: 20%;
+   position: relative;
+}
+}
 </style>
 
 <nav class="navigation">
@@ -27,9 +36,16 @@
     <li><a href="https://www.neh.gov/">NEH</a></li>
   </ul>
 
-  <button style="position:absolute;top:10px;right:10px" class="hamburger" href="">Navigate</button>
+  <button style="position:absolute;top:10px;right:10px" id="hamburger" href="">Navigate</button>
 
+<script>
+ $("#hamburger").click(function(){
+     $("ul.desktop-only").toggle("fast");
+     $(".desktop-only").toggleClass("vertical-display");
 
+ });
+
+</script>
 </nav>
 
 
