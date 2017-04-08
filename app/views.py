@@ -99,6 +99,18 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
             "digital_humanities": "Digital Humanities",
             }
 
+        division_description = {
+            "research_education": "Research into areas related to pedagogy.",
+            "other_humanities": "Humanities projects that don't fit neatly into other categories.",
+            "education": "Grants related to teaching and education.",
+            "research": "Grants related to research in the humanities.",
+            "public_programs": "Projects and programs that engage the public directly.",
+            "federal_state": "Collaborations with state or federal government.",
+            "challenge_grants": "Grants that challenge institutions to raise additional funds that are matched by the NEH at a set rate.",
+            "preservation_access": "Grants for preserving, restoring, or digitizing culture.",
+            "digital_humanities": "Grants related to the digital humanities.",
+            }
+
         all_divisions = [grant['division_reclassification'] for grant in grants]
 
         division_count = Counter(all_divisions)
@@ -107,9 +119,10 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
         divisions = []
         for classification in distinct_divisions:
             divisions.append({
-                "class" : classification,
-                "name" : display_names[classification],
-                "count" : division_count[classification]
+                "class": classification,
+                "name": display_names[classification],
+                "count": division_count[classification],
+                "description": division_description[classification],
                 })
 
         return render_template('results.html', grants=grants,

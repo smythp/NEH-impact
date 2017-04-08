@@ -30,7 +30,7 @@
   <p>
     <!-- <div class="legend headline">Legend</div> -->
     {% for division in divisions %}
-    <div class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
+    <div title="{{ division.description }}" class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
     {% endfor %}
   </p>
 </div>
