@@ -84,7 +84,7 @@ division_reclassification, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
-        print(zips_to_return)
+
         conn2 = db_connect(config.DATABASE)
         cur = conn2.cursor()
         grants = cur.execute(query, tuple(zips_to_return)).fetchall()
@@ -129,8 +129,6 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
                 "description": division_description[classification],
                 })
 
-            
-        [print(grant['ProjectTitle']) for grant in grants if 'DH Box' in grant]
         return render_template('results.html', grants=grants,
                                form=form, divisions=divisions,
                                results_count=results_count,
