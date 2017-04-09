@@ -4,6 +4,7 @@ from flask import flash, redirect, render_template
 from flask import request, session, url_for, jsonify
 from app.forms import ZipForm
 from collections import Counter
+import config
 
 # This lets us import dictionaries from the database instead of tuples
 def dict_factory(cursor, row):
@@ -60,11 +61,14 @@ def index():
         else:
             distance = 2.0
 
-        conn = sqlite3.connect('grants.db')
+        conn = sqlite3.connect(config.DATABASE)
         cur = conn.cursor()
         distance_query = 'SELECT end_zip from distances WHERE start_zip=? AND distance<?;'
-
+        
         zips_to_return = [zipcode[0] for zipcode in cur.execute(distance_query, (zip_input, distance,)).fetchall()]
+
+        # Add the original zip back in to the set of zips to be searched
+        zips_to_return.append(zip_input)
 
         query = 'SELECT Institution, \
 InstCity, \
@@ -80,8 +84,8 @@ division_reclassification, \
 PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
-
-        conn2 = db_connect('grants.db')
+        print(zips_to_return)
+        conn2 = db_connect(config.DATABASE)
         cur = conn2.cursor()
         grants = cur.execute(query, tuple(zips_to_return)).fetchall()
 
@@ -125,6 +129,8 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
                 "description": division_description[classification],
                 })
 
+            
+        [print(grant['ProjectTitle']) for grant in grants if 'DH Box' in grant]
         return render_template('results.html', grants=grants,
                                form=form, divisions=divisions,
                                results_count=results_count,
@@ -135,7 +141,7 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
     
 @app.route('/grant/<grant_id>', methods=['GET'])
 def project_entry(grant_id):
-    conn = db_connect('grants.db')
+    conn = db_connect(config.DATABASE)
     cur = conn.cursor()
     grant = cur.execute('SELECT * FROM grants WHERE id=?;', (grant_id,)).fetchone()
 
