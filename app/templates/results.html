@@ -22,7 +22,7 @@
 
   <!-- Put the results on the next line and indent if the screen is small -->
   <br class="none_on_desktop"><span class="none_on_desktop">&nbsp;&nbsp;&nbsp;</span>
-  {{ results_count }} result{% if results_count > 1%}s{% endif %} returned.
+  {{ results_count }} result{% if results_count > 1%}s{% endif %} returned within {{ distance }} miles of {{ original_zip }}
 </p>
 
 
@@ -37,7 +37,7 @@
 
 {% if grants %}
 {% else %}
-<p class="left-align">No results found for that zip code.</p>
+<p class="left-align">No results found within {{ distance }} miles of zip code {{ original_zip }}. <a href="index">Try again with a larger search distance.</a></p>
 {% endif %}
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}

@@ -59,7 +59,7 @@ def index():
         if 'distance' in request.form:
             distance = request.form['distance']
         else:
-            distance = 2.0
+            distance = 10.0
 
         conn = sqlite3.connect(config.DATABASE)
         cur = conn.cursor()
@@ -130,8 +130,8 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
                 })
 
         return render_template('results.html', grants=grants,
-                               form=form, divisions=divisions,
-                               results_count=results_count,
+                               form=form, divisions=divisions, original_zip=zip_input,
+                               results_count=results_count, distance=int(distance),
                                jquery=True,
                                title="Results")
         
