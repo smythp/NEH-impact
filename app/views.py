@@ -29,22 +29,22 @@ def question_mark_sequence(num):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html', title="404"), 404
 
 
 @app.route('/about', methods=['GET'])
 def about():
-    return render_template('about.html')
+    return render_template('about.html', title="About")
 
 
 @app.route('/faq', methods=['GET'])
 def faq():
-    return render_template('faq.html')
+    return render_template('faq.html', title="FAQ")
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('404.html'), 500
+    return render_template('404.html', title="500"), 500
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -132,10 +132,13 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
         return render_template('results.html', grants=grants,
                                form=form, divisions=divisions,
                                results_count=results_count,
-                               jquery=True)
+                               jquery=True,
+                               title="Results")
         
     else:
-        return render_template('index.html', form=form, jquery=True)
+        return render_template('index.html', form=form,
+                               jquery=True, title="Home")
+
     
 @app.route('/grant/<grant_id>', methods=['GET'])
 def project_entry(grant_id):
@@ -143,4 +146,5 @@ def project_entry(grant_id):
     cur = conn.cursor()
     grant = cur.execute('SELECT * FROM grants WHERE id=?;', (grant_id,)).fetchone()
 
-    return render_template('project_entry.html', grant=grant)
+    return render_template('project_entry.html',
+                           grant=grant, title=grant['ProjectTitle'])
