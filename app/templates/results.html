@@ -29,11 +29,11 @@
 
     <div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
   <p>
-    <!-- <div class="legend headline">Legend</div> -->
     {% for division in divisions %}
     <div title="{{ division.description }}" class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
     {% endfor %}
-  </p>
+
+    <p style="padding:0;margin-left:0"><small style="font-style:italic">NEH data updated {{ updated_on }}</small></p>
 </div>
 
 {% if grants %}

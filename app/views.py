@@ -130,6 +130,7 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
                 })
 
         return render_template('results.html', grants=grants,
+                               updated_on=config.DATA_UPDATED_ON,
                                form=form, divisions=divisions, original_zip=zip_input,
                                results_count=results_count, distance=int(distance),
                                jquery=True,
