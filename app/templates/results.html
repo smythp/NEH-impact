@@ -18,7 +18,7 @@
 
 
 <p style="padding:0">
-  <a href="index"><button style="margin-right:15px;padding:0 20px" style="margin-right:10px">New search</button></a>
+  <a href="/index"><button style="margin-right:15px;padding:0 20px" style="margin-right:10px">New search</button></a>
   <button style="margin-right:15px;padding:0 20px" id="view_overview" style="margin-right:10px">View Summary</button>
 
   <!-- Put the results on the next line and indent if the screen is small -->
@@ -38,7 +38,7 @@
 
 {% if grants %}
 {% else %}
-<p class="left-align">No results found within {{ distance }} miles of zip code {{ original_zip }}. <a href="index">Try again with a larger search distance.</a></p>
+<p class="left-align">No results found within {{ distance }} miles of zip code {{ original_zip }}. <a href="/index">Try again with a larger search distance.</a></p>
 {% endif %}
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}
@@ -46,7 +46,7 @@
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <a href="grant/{{ grant.id }}"><h6 class="division {{ grant.division_reclassification }}">{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
+    <a href="/grant/{{ grant.id }}"><h6 class="division {{ grant.division_reclassification }}">{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
 
     <strong><p>{{ grant.Institution }}<br>
       {{ grant.InstCity }}, {{grant.InstState }}&nbsp; &nbsp;|&nbsp;&nbsp; {{ grant.YearAwarded }}</p></strong>
