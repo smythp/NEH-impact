@@ -68,12 +68,18 @@ def index():
                                jquery=True, title="Home")
 
 
-@app.route('/test', methods=['GET'])
-def test():
-    return 'ham sandwich'
+@app.route('/search/', methods=['GET'])
+def route_search():
+    query_parameters = request.args
+    zip = query_parameters.get("zip")
+    distance = query_parameters.get("distance")    
+    division = query_parameters.get("division")
+    
+    return search(zip, distance, division=division)
+
 
 @app.route('/search/zip/<zip_input>/distance/<distance>', methods=['GET'])
-def search(zip_input, distance):
+def search(zip_input, distance, division=None):
 
     form = ZipForm(request.form)
     
