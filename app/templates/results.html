@@ -43,7 +43,7 @@
 	<p style="padding:0;margin:0 0 3px 0"><small style="font-style:italic">Select to filter by category </small></p>
     {% for division in divisions %}
     <div title="{{ division.description }}" class="legend {{ division.class }}">
-      <a href="{{ division.filter_url }}">
+      <a style="color:#ffffff" href="{{ division.filter_url }}">
 	{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}
       </a>
     </div>
