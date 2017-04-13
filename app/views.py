@@ -68,6 +68,8 @@ def index():
                                jquery=True, title="Home")
 
 
+# Handler for searches using query parameters
+# Take the form: http://www.nehimpact.org/search/?zip=10016&distance=2
 @app.route('/search/', methods=['GET'])
 def route_search():
     query_parameters = request.args
@@ -107,6 +109,10 @@ PrimaryDiscipline \
 FROM grants WHERE ShortPostal in (%s) \
 AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequence(len(zips_to_return))
 
+    if division: 
+        query = query[:-1] + " AND division_reclassification=?;"
+        zips_to_return.append(division)
+    
     conn2 = db_connect(config.DATABASE)
     cur = conn2.cursor()
     grants = cur.execute(query, tuple(zips_to_return)).fetchall()
@@ -125,6 +131,7 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
         "digital_humanities": "Digital Humanities",
     }
 
+    # Descriptions used for tooltops
     division_description = {
         "research_education": "Research into areas related to pedagogy.",
         "other_humanities": "Humanities projects that don't fit neatly into other categories.",
@@ -149,13 +156,15 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
             "name": display_names[classification],
             "count": division_count[classification],
             "description": division_description[classification],
+            "filter_url": "/search/?zip=%s&distance=%s&division=%s" % (zip_input, distance, classification,)
+            
             })
-
+    
     return render_template('results.html', grants=grants,
                            updated_on=config.DATA_UPDATED_ON,
                            form=form, divisions=divisions, original_zip=zip_input,
                            results_count=results_count, distance=int(distance),
-                           jquery=True,
+                           jquery=True, division_filter=division,
                            title="Results")
         
 

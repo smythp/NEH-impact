@@ -19,22 +19,37 @@
 
 <p style="padding:0">
   <a href="/index"><button style="margin-right:15px;padding:0 20px" style="margin-right:10px">New search</button></a>
+  {% if division_filter %}
+  {% else %}
   <button style="margin-right:15px;padding:0 20px" id="view_overview" style="margin-right:10px">View Summary</button>
+  {% endif %}
 
   <!-- Put the results on the next line and indent if the screen is small -->
   <br class="none_on_desktop"><span class="none_on_desktop">&nbsp;&nbsp;&nbsp;</span>
-  {{ results_count }} result{% if results_count > 1%}s{% endif %} returned within {{ distance }} miles of {{ original_zip }}
+  {{ results_count }} result{% if results_count > 1 or results_count == 0 %}s{% endif %} returned within {{ distance }} miles of {{ original_zip }}
 </p>
 
 
     <div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
-  <p>
+      <p>
+	<p style="padding:0;margin:0 0 3px 0"><small style="font-style:italic">Select to filter by category </small></p>
     {% for division in divisions %}
-    <div title="{{ division.description }}" class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
+    <div title="{{ division.description }}" class="legend {{ division.class }}">
+      <a href="{{ division.filter_url }}">
+	{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}
+      </a>
+    </div>
+	
     {% endfor %}
 
     <p style="padding:0;margin-left:0"><small style="font-style:italic">NEH data updated {{ updated_on }}</small></p>
 </div>
+
+  {% if division_filter %}
+  <p>Showing only results for impact category "{{ divisions[0].name }}."
+    <a href="/search/?zip={{ original_zip }}&distance={{ distance }}">Disable filter.</a></p>
+  {% endif %}
+
 
 {% if grants %}
 {% else %}
