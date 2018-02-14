@@ -13,7 +13,6 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-
 def db_connect(db_name):
     """Connect to named database and returns cursor object."""
     conn = sqlite3.connect(db_name)
@@ -22,7 +21,8 @@ def db_connect(db_name):
 
 
 def question_mark_sequence(num):
-    "Makes sequence of question marks that is NUM long for use in building SQL statements."
+    '''Makes sequence of question marks\
+    that is NUM long for use in building SQL statements.'''
     x = '?, ' * num
     return x[:-2]
 
