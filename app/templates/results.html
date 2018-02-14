@@ -17,27 +17,48 @@
 <h2>Results</h2>
 
 
-<p>
-  <button id="view_overview" style="margin-right:10px">View Overview</button>
+<p style="padding:0">
+
+  {% if division_filter %}
+    <a href="/search/?zip={{ original_zip }}&distance={{ distance }}"><button style="margin-right:15px;padding:0 20px" style="margin-right:10px">Back to all categories</button></a>
+    {% else %}
+    <a href="/index"><button style="margin-right:15px;padding:0 20px" style="margin-right:10px">New search</button></a>
+  <button style="margin-right:15px;padding:0 20px" id="view_overview" style="margin-right:10px">View Summary</button>
+  {% endif %}
 
   <!-- Put the results on the next line and indent if the screen is small -->
   <br class="none_on_desktop"><span class="none_on_desktop">&nbsp;&nbsp;&nbsp;</span>
-  {{ results_count }} result{% if results_count > 1%}s{% endif %} returned.
+  {{ results_count }}
+  <!-- Correct singluar or plural i.e. "result" or "results" -->
+  result{% if results_count > 1 or results_count == 0 %}s{% endif %}
+  returned
+  <!-- Display category name if filter is enabled -->
+  {% if division_filter %}for category {{ divisions[0].name }} {% endif %}</italic>
+  within {{ distance }} miles of {{ original_zip }}
 </p>
 
 
     <div id="overview_panel" style="display:none;margin-left:5%;width: 200px">
-  <p>
-    <!-- <div class="legend headline">Legend</div> -->
+      <p>
+	<p style="padding:0;margin:0 0 3px 0"><small style="font-style:italic">Select to filter by category </small></p>
     {% for division in divisions %}
-    <div class="legend {{ division.class }}">{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}</div>
+      <a style="color:#ffffff" href="{{ division.filter_url }}">
+	<div title="{{ division.description }}" class="legend {{ division.class }}">
+
+	{{ division.name }}: {{ division.count }} result{% if division.count > 1 %}s{% endif %}
+
+
+    </div>
+      </a>	
     {% endfor %}
-  </p>
+
+    <p style="padding:0;margin-left:0"><small style="font-style:italic">NEH data updated {{ updated_on }}</small></p>
 </div>
+
 
 {% if grants %}
 {% else %}
-<p class="left-align">No results found for that zip code.</p>
+<p class="left-align">No results found within {{ distance }} miles of zip code {{ original_zip }}. <a href="/index">Try again with a larger search distance.</a></p>
 {% endif %}
 
 {% for grant in grants|sort(reverse=True, attribute='YearAwarded') %}
@@ -45,7 +66,7 @@
 
 {{ loop.cycle('<div class="row">', '') | safe }}
   <div class="six columns card">
-    <a href="grant/{{ grant.id }}"><h6 class="division {{ grant.division_reclassification }}">{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
+    <a href="/grant/{{ grant.id }}"><h6 class="division {{ grant.division_reclassification }}">{{ grant.ProjectTitle  | truncate(32) }}</h6></a>
 
     <strong><p>{{ grant.Institution }}<br>
       {{ grant.InstCity }}, {{grant.InstState }}&nbsp; &nbsp;|&nbsp;&nbsp; {{ grant.YearAwarded }}</p></strong>

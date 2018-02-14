@@ -126,29 +126,56 @@ strong {
 .other_humanities {
     background-color: #D32A31;
 }
+.legend.other_humanities:hover {
+    background-color: #2CD5CE;
+}
 .education {
     background-color: #00ABED;
+}
+.legend.education:hover {
+    background-color: #FF5412;
 }
 .research {
     background-color: #23BC4A;
 }
+.legend.research:hover {
+    background-color: #DC43B5;
+}
 .public_programs {
     background-color: #F20591;
+}
+.legend.public_programs:hover {
+    background-color: #0DFA6E;
 }
 .federal_state {
     background-color: #F7BE29;
 }
+.legend.federal_state:hover {
+    background-color: #0841D6;
+}
 .challenge_grants {
     background-color: #DB5A1E;
+}
+.legend.challenge_grants:hover {
+    background-color: #24A5E1;
 }
 .preservation_access {
     background-color: #2B52BC;
 }
+.legend.preservation_access:hover {
+    background-color: #D4AD43;
+}
 .digital_humanities {
     background-color: #ff3030;
 }
+.legend.digital_humanities:hover {
+    background-color: #00CFCF;
+}
 .research_education {
     background-color: #228b22;
+}
+.legend.research_education:hover {
+    background-color: #DD74DD;
 }
 
 .legend {
@@ -195,4 +222,32 @@ a {
 
 .faq.a {
     margin-left:20px;
+}
+
+.box-shadow-menu {
+  position: relative;
+  padding-left: 1.25em;
+}
+.box-shadow-menu:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 2em;
+  border:solid;
+  height: .2em;
+  background: black;
+  box-shadow: 
+    0 .6em 0 0 black,
+    0 1.2em 0 0 black;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
 }

@@ -6,33 +6,45 @@
 
 <form method="post" action="/index.html">
   <div class="row">
-    <h2>Enter a zip code</h2>    
-    {{ render_field(form.zip, class="u-full-width", placeholder="try 10016", autofocus=True) }}  </div>
+    <h2>NEH Impact Index</h2>
+    <span style="color:gray">Enter a zip code</span>
+    {{ render_field(form.zip, class="u-full-width", alt="enter a five-digit zip", type="number",  pattern="\d*", placeholder="try 10016", autofocus=True) }}  </div>
+  
+
   <span id="hide-buttons">
     <input id="submit-button" class="button-primary" type="submit" value="Submit">
 
-  <div class="button" id="flip">Distance</div>
+  <div class="button" id="distance-main">Distance</div>
   </span>
   <span id="panel">
-    <label class="button"><input type="radio" name="distance" value="2">2</label>
-    <label class="button"><input type="radio" name="distance" value="5">5</label>
-    <label class="button"><input type="radio" name="distance" value="10">10</label>
-    <label class="button"><input type="radio" name="distance" value="20">20</label>
-    <label class="button"><input type="radio" name="distance" value="50">50</label>
+    <label class="button"><input class="numbered-button" type="radio" name="distance" value="2">2</label>
+    <label class="button"><input class="numbered-button" type="radio" name="distance" value="5">5</label>
+    <label class="button"><input class="numbered-button" type="radio" name="distance" value="10">10</label>
+    <label class="button"><input class="numbered-button" type="radio" name="distance" value="20">20</label>
+    <label class="button"><input class="numbered-button" type="radio" name="distance" value="50">50</label>
   </span>
   </div>
 </form>
 
 <script>
- $("#flip").click(function(){
+ $("#distance-main").click(function(){
 
      $("#hide-buttons").hide("fast");
      $("#panel").show("slow");
+
  });
  $("#panel").click(function(){
      $("#panel").hide("fast");
      $("#hide-buttons").show("slow");
- });     
+
+ });
+ $(".numbered-button").click(function(){
+     var selected_distance = String($(this).val());
+     $("#distance-main").text(selected_distance.concat(" mile radius"));
+
+
+     });
+ 
 </script>
   
 {% endblock %}
