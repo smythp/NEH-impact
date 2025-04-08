@@ -144,7 +144,7 @@ AND (ProjectDesc is not null OR ToSupport is not null);' % question_mark_sequenc
         "digital_humanities": "Grants related to the digital humanities.",
         }
 
-    all_divisions = [grant['division_reclassification'] for grant in grants]
+    all_divisions = [grant['division_reclassification'].lower() for grant in grants]
 
     division_count = Counter(all_divisions)
     distinct_divisions = set(all_divisions)
